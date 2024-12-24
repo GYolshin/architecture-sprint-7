@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: exc5-network-policy
+  namespace: test-app
+spec:
+  podSelector:
+    matchLabels:
+      role: back-end-api-app
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: front-end-app
+    ports:
+    - protocol: TCP
+      port: 80
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          role: front-end-app
+    ports:
+    - protocol: TCP
+      port: 80
