@@ -26,3 +26,35 @@ spec:
     ports:
     - protocol: TCP
       port: 80
+
+---
+
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: exc5-network-policy-for-admin
+  namespace: test-app
+spec:
+  podSelector:
+    matchLabels:
+      role: admin-back-end-api-app
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: admin-front-end-app
+    ports:
+    - protocol: TCP
+      port: 80
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          role: admin-front-end-app
+    ports:
+    - protocol: TCP
+      port: 80
