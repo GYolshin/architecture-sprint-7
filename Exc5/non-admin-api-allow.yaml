@@ -47,14 +47,14 @@ spec:
     - podSelector:
         matchLabels:
           role: admin-front-end-app
-    ports:
-    - protocol: TCP
-      port: 80
+    #ports:
+    #- protocol: TCP
+    #- port: 80
   egress:
   - to:
     - podSelector:
         matchLabels:
           role: admin-front-end-app
-    ports:
-    - protocol: TCP
-      port: 80
+    #ports:
+    #- protocol: TCP
+    #- port: 80
